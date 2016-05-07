@@ -8,11 +8,17 @@
 
 #import "Sample.h"
 
+@interface Sample () <SRWebSocketDelegate>
+
+@end
+
 @implementation Sample
 {
     LeapController *controller;
     NSArray *fingerNames;
     NSArray *boneNames;
+	
+	SRWebSocket *socket;
 }
 
 - (id)init
@@ -34,8 +40,23 @@
 - (void)run
 {
     controller = [[LeapController alloc] init];
-    [controller addListener:self];
-    NSLog(@"running");
+//	[controller addListener:self];
+//	NSLog(@"running");
+	
+	NSURL *url = [[NSURL alloc] initWithString:@"ws://taptappun.cloudapp.net:3001"];
+	socket = [[SRWebSocket alloc] initWithURL:url];
+	[socket setDelegate:self];
+	[socket open];
+	
+}
+
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket {
+	NSLog(@"didOpen");
+	[webSocket send:@"Hello, world! from Mac"];
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
+	
 }
 
 

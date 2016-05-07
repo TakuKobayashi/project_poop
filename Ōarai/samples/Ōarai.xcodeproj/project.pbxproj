@@ -12,6 +12,8 @@
 		73BF4B1316F7B3DE00DE8B54 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 015FEFCA1682E4DF00DEEFA0 /* libLeap.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		79B5073B1CDE16980016C056 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79B5073A1CDE16980016C056 /* SocketRocket.framework */; };
 		79B5073C1CDE16A60016C056 /* SocketRocket.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 79B5073A1CDE16980016C056 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		79B5073E1CDE18130016C056 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79B5073D1CDE18130016C056 /* CFNetwork.framework */; };
+		79B507401CDE181E0016C056 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79B5073F1CDE181E0016C056 /* Security.framework */; };
 		B599FCC81656F5020092AFFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B599FCC71656F5020092AFFD /* Cocoa.framework */; };
 		B599FCD21656F5020092AFFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B599FCD01656F5020092AFFD /* InfoPlist.strings */; };
 		B599FCD41656F5020092AFFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B599FCD31656F5020092AFFD /* main.m */; };
@@ -43,6 +45,8 @@
 		015FEFCA1682E4DF00DEEFA0 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLeap.dylib; path = ../lib/libLeap.dylib; sourceTree = "<group>"; };
 		79B5072F1CDE16010016C056 /* SocketRocket 2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "SocketRocket 2.xcodeproj"; path = "../SocketRocket/SocketRocket 2.xcodeproj"; sourceTree = "<group>"; };
 		79B5073A1CDE16980016C056 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Ōarai-ehcnbrwnpiegcsfuelrauirbyzji/Build/Products/Debug/SocketRocket.framework"; sourceTree = "<group>"; };
+		79B5073D1CDE18130016C056 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		79B5073F1CDE181E0016C056 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B599FCC31656F5020092AFFD /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B599FCC71656F5020092AFFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		B599FCCA1656F5020092AFFD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -65,6 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79B507401CDE181E0016C056 /* Security.framework in Frameworks */,
+				79B5073E1CDE18130016C056 /* CFNetwork.framework in Frameworks */,
 				79B5073B1CDE16980016C056 /* SocketRocket.framework in Frameworks */,
 				B599FCC81656F5020092AFFD /* Cocoa.framework in Frameworks */,
 				015FEFCB1682E4DF00DEEFA0 /* libLeap.dylib in Frameworks */,
@@ -102,6 +108,8 @@
 		B599FCC61656F5020092AFFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79B5073F1CDE181E0016C056 /* Security.framework */,
+				79B5073D1CDE18130016C056 /* CFNetwork.framework */,
 				79B5073A1CDE16980016C056 /* SocketRocket.framework */,
 				015FEFCA1682E4DF00DEEFA0 /* libLeap.dylib */,
 				B599FCC71656F5020092AFFD /* Cocoa.framework */,

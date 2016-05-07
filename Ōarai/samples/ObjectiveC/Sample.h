@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LeapObjectiveC.h"
+#import "SocketRocket/SRWebSocket.h"
 
 @interface Sample : NSObject<LeapListener>
 
