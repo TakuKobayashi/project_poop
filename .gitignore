@@ -23,6 +23,7 @@ emscripten/
 .DS_Store
 
 # Xcode
+UserInterfaceState.xcuserstate
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcworkspace/contents.xcworkspacedata
