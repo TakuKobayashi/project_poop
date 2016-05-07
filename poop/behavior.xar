@@ -81,7 +81,6 @@ class MyClass(GeneratedClass):
 
         if self.isVirtualRobot == False:
             self.initRecoding()
-            self.sendEye()
             pass
         pass
 
@@ -307,39 +306,6 @@ class MyClass(GeneratedClass):
     def sendEyeTmp(self):
         self.logger.info('send_eye_______2')
         self.video.subscribeCamera('camName', 0, 1)
-        pass
-
-    def sendEye(self):
-        if self.sendEyeBlocking == False:
-            import Image
-
-            self.logger.info("____________send eye____________")
-            #INIT DATA
-            tmpDir = os.path.join(self.framemanager.getBehaviorPath(self.behaviorId), "./html/tmp_picture")
-
-            picture = self.video.getImageRemote(self.camObj)
-            imgSize = (int(picture[0]),int(picture[1]))
-            pngImg = Image.fromstring('RGB', imgSize, picture[6])
-
-            savePath = tmpDir+"/tmp_eye.jpg"
-
-            pngImg.save(savePath)
-
-            imageData = open(savePath).read()
-
-            if imageData != "":
-                sendData  = '[!dataURL!]||||'
-                sendData += 'eye_image||||'
-                sendData += 'data:image/jpeg;base64,'+base64.b64encode(imageData)+'||||'
-                sendData += str(self.connectonToken)
-
-                self.ws.send(sendData)
-                pass
-        else:
-            pass
-
-        self.eyeTimer=threading.Timer(0.1,self.sendEye)
-        self.eyeTimer.start()
         pass
 
     def stopEye(self):
