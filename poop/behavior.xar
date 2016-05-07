@@ -35,12 +35,6 @@ class MyClass(GeneratedClass):
         self.framemanager = ALProxy("ALFrameManager")
         self.memory = ALProxy("ALMemory")
 
-        try:
-            self.photoCapture = ALProxy( "ALPhotoCapture" )
-            self.video = ALProxy("ALVideoDevice")
-        except Exception as e:
-            self.photoCapture = None
-            self.video = None
         pass
 
     def onUnload(self):
@@ -49,9 +43,6 @@ class MyClass(GeneratedClass):
         self.framemanager = None
         self.memory = None
         self.ws = None
-
-        self.video = None
-        self.photoCapture = None
 
         pass
 
