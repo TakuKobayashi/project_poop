@@ -26,7 +26,6 @@ class MyClass(GeneratedClass):
         GeneratedClass.__init__(self)
 
     def onLoad(self):
-        self.isVirtualRobot = False
         self.freez = False
         self.connectonToken = None
         self.ws = None
@@ -78,9 +77,6 @@ class MyClass(GeneratedClass):
 
         self.ws_send_message({"action":"actioncomplete", "data":str(self.connectonToken)})
 
-        if self.isVirtualRobot == False:
-            self.initRecoding()
-            pass
         pass
 
     def onInput_initCompletePicture(self):
@@ -109,19 +105,6 @@ class MyClass(GeneratedClass):
             pass
 
         self.sendEyeBlocking = False
-        pass
-
-    ## --- START RECODING ----- ##
-    def initRecoding(self):
-        videName = 'rospy_gvm_test'
-        cameraId = 0
-        resolution = 2
-        colorspace = 11
-        framerate = 15
-
-        self.video.unsubscribeAllInstances(videName)
-
-        self.camObj = self.video.subscribeCamera(videName, cameraId, resolution, colorspace, framerate)
         pass
 
     ## ---- START ROBOT ACTIONS ---- ##
