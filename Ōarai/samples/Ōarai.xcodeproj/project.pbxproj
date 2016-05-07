@@ -10,6 +10,8 @@
 		015FEFC91682E49B00DEEFA0 /* LeapObjectiveC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 015FEFC81682E49B00DEEFA0 /* LeapObjectiveC.mm */; };
 		015FEFCB1682E4DF00DEEFA0 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 015FEFCA1682E4DF00DEEFA0 /* libLeap.dylib */; };
 		73BF4B1316F7B3DE00DE8B54 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 015FEFCA1682E4DF00DEEFA0 /* libLeap.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		79B5073B1CDE16980016C056 /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79B5073A1CDE16980016C056 /* SocketRocket.framework */; };
+		79B5073C1CDE16A60016C056 /* SocketRocket.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 79B5073A1CDE16980016C056 /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B599FCC81656F5020092AFFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B599FCC71656F5020092AFFD /* Cocoa.framework */; };
 		B599FCD21656F5020092AFFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B599FCD01656F5020092AFFD /* InfoPlist.strings */; };
 		B599FCD41656F5020092AFFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B599FCD31656F5020092AFFD /* main.m */; };
@@ -26,6 +28,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				79B5073C1CDE16A60016C056 /* SocketRocket.framework in CopyFiles */,
 				73BF4B1316F7B3DE00DE8B54 /* libLeap.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -38,6 +41,8 @@
 		015FEFBF1682E47300DEEFA0 /* LeapObjectiveC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeapObjectiveC.h; path = ../../include/LeapObjectiveC.h; sourceTree = "<group>"; };
 		015FEFC81682E49B00DEEFA0 /* LeapObjectiveC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LeapObjectiveC.mm; path = ../../include/LeapObjectiveC.mm; sourceTree = "<group>"; };
 		015FEFCA1682E4DF00DEEFA0 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLeap.dylib; path = ../lib/libLeap.dylib; sourceTree = "<group>"; };
+		79B5072F1CDE16010016C056 /* SocketRocket 2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "SocketRocket 2.xcodeproj"; path = "../SocketRocket/SocketRocket 2.xcodeproj"; sourceTree = "<group>"; };
+		79B5073A1CDE16980016C056 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Ōarai-ehcnbrwnpiegcsfuelrauirbyzji/Build/Products/Debug/SocketRocket.framework"; sourceTree = "<group>"; };
 		B599FCC31656F5020092AFFD /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B599FCC71656F5020092AFFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		B599FCCA1656F5020092AFFD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -60,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79B5073B1CDE16980016C056 /* SocketRocket.framework in Frameworks */,
 				B599FCC81656F5020092AFFD /* Cocoa.framework in Frameworks */,
 				015FEFCB1682E4DF00DEEFA0 /* libLeap.dylib in Frameworks */,
 			);
@@ -68,12 +74,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		79B507341CDE160A0016C056 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		B599FCB81656F5020092AFFD = {
 			isa = PBXGroup;
 			children = (
 				B599FCCD1656F5020092AFFD /* Sample */,
 				B599FCC61656F5020092AFFD /* Frameworks */,
 				B599FCC41656F5020092AFFD /* Products */,
+				79B5072F1CDE16010016C056 /* SocketRocket 2.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,6 +102,7 @@
 		B599FCC61656F5020092AFFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79B5073A1CDE16980016C056 /* SocketRocket.framework */,
 				015FEFCA1682E4DF00DEEFA0 /* libLeap.dylib */,
 				B599FCC71656F5020092AFFD /* Cocoa.framework */,
 				B599FCC91656F5020092AFFD /* Other Frameworks */,
@@ -183,6 +198,12 @@
 			mainGroup = B599FCB81656F5020092AFFD;
 			productRefGroup = B599FCC41656F5020092AFFD /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 79B507341CDE160A0016C056 /* Products */;
+					ProjectRef = 79B5072F1CDE16010016C056 /* SocketRocket 2.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B599FCC21656F5020092AFFD /* Sample */,
