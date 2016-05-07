@@ -16,15 +16,22 @@
 	
 	bool isHandsClose;
 	
+	int interval;
+	
 	SRWebSocket *socket;
 	bool isSockedOpened;
+	bool isRightHandSwipingToRight;
 }
 
 - (id)init
 {
 	
 	isHandsClose = false;
+	
+	interval = 0;
+	
 	isSockedOpened = false;
+	isRightHandSwipingToRight = false;
 	
     self = [super init];
 	
@@ -76,6 +83,8 @@
 - (void)onConnect:(NSNotification *)notification
 {
     NSLog(@"Connected");
+	LeapController *notificationController = [notification object];
+	[notificationController enableGesture:LEAP_GESTURE_TYPE_SWIPE enable:YES];
 }
 
 - (void)onFrame:(NSNotification *)notification
@@ -85,11 +94,21 @@
     // Get the most recent frame and report some basic information
     LeapFrame *frame = [aController frame:0];
 	
+	interval++;
+	if (interval >= 30) {
+		interval = 0;
+	}
+	
+	if (interval == 0) {
+		[self setHandsPositions:frame];
+	}
+	
 	if ([self closeHandsGesture:frame]) {
 		if (isSockedOpened) {
 			[socket send:@"{\"action\":\"V8\", \"data\":\"null\"}"];
 		}
 		NSLog(@"V8!");
+		
 	}
 	
 }
@@ -112,7 +131,7 @@
 
 #pragma mark - Gestures
 
-- (BOOL) closeHandsGesture: (LeapFrame *)frame {
+- (BOOL)closeHandsGesture: (LeapFrame *)frame {
 	
 	if ([[frame hands] count] > 1) {
 		LeapHand *hand1 = [[frame hands] objectAtIndex:0];
@@ -133,6 +152,47 @@
 	
 	isHandsClose = false;
 	return false;
+	
+}
+
+
+
+- (void)setHandsPositions: (LeapFrame *)frame {
+	
+	NSArray *array = [frame hands];
+	for (LeapHand *hand in array) {
+		float x = hand.palmPosition.x;
+		float y = hand.palmPosition.y;
+		if (hand.isLeft) {
+			x += 110;
+		} else if (hand.isRight) {
+			x -= 110;
+		}
+		x /= -50;
+		if (x < -1) {
+			x = -1;
+		} else if (x > 1) {
+			x = 1;
+		}
+		
+		y -= 350;
+		y /= -250;
+		if (y < -1) {
+			y = -1;
+		} else if (y > 1) {
+			y = 1;
+		}
+		
+		NSString *shoulder = @"shoulder";
+		if (hand.isLeft) {
+			shoulder = [@"move_l" stringByAppendingString:shoulder];
+		} else if (hand.isRight) {
+			shoulder = [@"move_r" stringByAppendingString:shoulder];
+		}
+		
+		NSString *message = [NSString stringWithFormat:@"{\"action\":\"%@\", \"data\":\"[%f, %f]\"}", shoulder, x, y];
+		[socket send:message];
+	}
 	
 }
 
