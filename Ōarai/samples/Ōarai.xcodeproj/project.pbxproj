@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		015FEFC91682E49B00DEEFA0 /* LeapObjectiveC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 015FEFC81682E49B00DEEFA0 /* LeapObjectiveC.mm */; };
 		015FEFCB1682E4DF00DEEFA0 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 015FEFCA1682E4DF00DEEFA0 /* libLeap.dylib */; };
-		73BF4B1316F7B3DE00DE8B54 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 015FEFCA1682E4DF00DEEFA0 /* libLeap.dylib */; };
+		73BF4B1316F7B3DE00DE8B54 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 015FEFCA1682E4DF00DEEFA0 /* libLeap.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B599FCC81656F5020092AFFD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B599FCC71656F5020092AFFD /* Cocoa.framework */; };
 		B599FCD21656F5020092AFFD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B599FCD01656F5020092AFFD /* InfoPlist.strings */; };
 		B599FCD41656F5020092AFFD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B599FCD31656F5020092AFFD /* main.m */; };
@@ -170,7 +170,7 @@
 		B599FCBA1656F5020092AFFD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Leap Motion";
 			};
 			buildConfigurationList = B599FCBD1656F5020092AFFD /* Build configuration list for PBXProject "Ōarai" */;
@@ -249,12 +249,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -280,7 +280,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;
