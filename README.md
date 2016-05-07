@@ -1,5 +1,6 @@
 # poops
 
+## Protocol
 | action  | data  | example |
 | :------------:  | :------------:  | :------------:  |
 | change_eyecolor | string  | {"action":"change_eyecolor", "data":"red"}  |
