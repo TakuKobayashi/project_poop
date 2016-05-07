@@ -54,7 +54,6 @@ class MyClass(GeneratedClass):
         self.video = None
         self.photoCapture = None
 
-        self.stopEye()
         pass
 
     def onInput_onStart(self, url):
@@ -165,7 +164,6 @@ class MyClass(GeneratedClass):
     def disconnectionMethod(self):
         self.freez = True
         self.sendEyeBlocking = True
-        self.stopEye()
         self.output_disconnection()
         pass
 
@@ -308,10 +306,6 @@ class MyClass(GeneratedClass):
         self.video.subscribeCamera('camName', 0, 1)
         pass
 
-    def stopEye(self):
-        if self.eyeTimer != None:
-            self.eyeTimer.cancel()
-        pass
     ## ---- ROBOT EYE LOOP ---- ##]]>
 </content>
                             </script>
