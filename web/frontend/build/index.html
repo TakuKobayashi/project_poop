@@ -89,6 +89,8 @@
       
       if(!!event.results[event.resultIndex].isFinal){
         console.info("result:",result)
+        
+        ws.send(JSON.stringify({"textMessage":result.transcript.split(" ")}))
         if(!!result.transcript.match("V8")) ws.send(JSON.stringify({"action":"V8","data":null}));
         $("body").addClass("result");
         $.ajax({
