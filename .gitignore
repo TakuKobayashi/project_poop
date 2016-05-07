@@ -21,3 +21,4 @@ emscripten/
 
 # OSX
 .DS_Store
+web/frontend/node_modules
