@@ -179,14 +179,13 @@ class MyClass(GeneratedClass):
         decoded = urllib.unquote(data)
 
         self.logger.info("DEBUGDEBUGDEBUGDEBUGDEBUGDEBUG")
-        self.logger.info(str(decoded))
-        self.logger.info(pformat(decoded))
+        self.logger.info(decoded)
         self.logger.info("robot will move right shoulder2")
         self.output_rshoulder(decoded)
         pass
 
     def V8(self):
-        self.logger.info("Witness me!!!!")
+        self.logger.info("Witness ME!!!!")
         self.output_v8()
         pass
     ## ---- END ROBOT ACTIONS ---- ##
@@ -320,7 +319,7 @@ class MyClass(GeneratedClass):
                             <Output name="output_take_picture" type="1" type_size="1" nature="2" inner="0" tooltip="output_take_picture" id="14" />
                             <Output name="output_byebye" type="1" type_size="1" nature="2" inner="0" tooltip="output_byebye" id="15" />
                             <Output name="output_change_eyecolor" type="3" type_size="1" nature="2" inner="0" tooltip="" id="16" />
-                            <Output name="output_leftshoulder" type="2" type_size="2" nature="2" inner="0" tooltip="" id="17" />
+                            <Output name="output_rshoulder" type="3" type_size="1" nature="2" inner="0" tooltip="" id="17" />
                             <Output name="output_v8" type="1" type_size="1" nature="2" inner="0" tooltip="" id="18" />
                         </Box>
                         <Box name="Connect Infomation" id="14" localization="8" tooltip="connection_infomation&#x0A;" x="223" y="17">
@@ -6534,7 +6533,7 @@ class MyClass(GeneratedClass):
 </content>
                             </script>
                             <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
-                            <Input name="Python Script_onStart" type="2" type_size="2" nature="2" inner="0" tooltip="This input has been automatically generated&#x0A;by converting several boxes into a single box." id="2" />
+                            <Input name="Python Script_onStart" type="3" type_size="1" nature="2" inner="0" tooltip="This input has been automatically generated&#x0A;by converting several boxes into a single box." id="2" />
                             <Output name="PythonScript_onStopped" type="0" type_size="1" nature="2" inner="0" tooltip="This output has been automatically generated&#x0A;by converting several boxes into a single box." id="3" />
                             <Timeline enable="0">
                                 <BehaviorLayer name="behavior_layer1">
@@ -6562,13 +6561,14 @@ class MyClass(GeneratedClass):
 
         motion_service.setStiffnesses("RShoulderRoll", 1.0)
 
-        self.logger.info("DEBUG: inside Move RShoulder:::::::")
-        self.logger.info(inspect(data))
+        self.logger.info(":::::::DEBUG: inside Move RShoulder:::::::")
+        self.logger.info(data)
 
 
         # Example showing how to set angles, using a fraction of max speed
         names  = ["RShoulderRoll", "RShoulderPitch"]
-        angles  = data
+        #angles  = data
+        angles  = [-1.0, 1.0]
 
         fractionMaxSpeed  = 1.0
         motion_service.setAngles(names, angles, fractionMaxSpeed)
@@ -6584,7 +6584,7 @@ class MyClass(GeneratedClass):
 </content>
                                                 </script>
                                                 <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
-                                                <Input name="onStart" type="2" type_size="2" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+                                                <Input name="onStart" type="3" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
                                                 <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
                                                 <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
                                             </Box>
