@@ -3,7 +3,7 @@
 ## Protocol
 | action  | data  | example |
 | :------------:  | :------------:  | :------------:  |
-| change_eyecolor |  red, blue, green  | {"action":"change_eyecolor", "data":"red"}  |
+| change_eyecolor |  red, blue, green, black, brown, cyan, magenta, orange, purple, yellow, white  | {"action":"change_eyecolor", "data":"red"}  |
 | move_head  |  [Pitch(float), Yaw(float)] | {"action":"move_head", "data":"[-1.0, -1.0]"} |
 | move_rshoulder  |  [Roll(float), Pitch(float)] | {"action":"move_rshoulder", "data":"[-1.0, -1.0]"} |
 | move_lshoulder  |  [Roll(float), Pitch(float)] | {"action":"move_lshoulder", "data":"[1.0, -1.0]"} |
