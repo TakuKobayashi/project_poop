@@ -24,16 +24,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		79B5078A1CDE32550016C056 /* PBXContainerItemProxy */ = {
+		79B507AB1CDE609F0016C056 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 79B5077D1CDE32550016C056 /* SocketRocket.xcodeproj */;
+			containerPortal = 79B507A61CDE609F0016C056 /* SocketRocket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F668C880153E91210044DBAC;
 			remoteInfo = "SocketRocket-OSX";
 		};
-		79B5078E1CDE32550016C056 /* PBXContainerItemProxy */ = {
+		79B507AD1CDE609F0016C056 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 79B5077D1CDE32550016C056 /* SocketRocket.xcodeproj */;
+			containerPortal = 79B507A61CDE609F0016C056 /* SocketRocket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F6BDA802145900D200FE3253;
 			remoteInfo = SRWebSocketTests;
@@ -63,9 +63,9 @@
 		79B5073A1CDE16980016C056 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = "../../../../Library/Developer/Xcode/DerivedData/Ōarai-ehcnbrwnpiegcsfuelrauirbyzji/Build/Products/Debug/SocketRocket.framework"; sourceTree = "<group>"; };
 		79B5073D1CDE18130016C056 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		79B5073F1CDE181E0016C056 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		79B5077D1CDE32550016C056 /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../../SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
 		79B5079A1CDE59860016C056 /* Anko.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Anko.h; sourceTree = "<group>"; };
 		79B5079B1CDE59860016C056 /* Anko.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Anko.m; sourceTree = "<group>"; };
+		79B507A61CDE609F0016C056 /* SocketRocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SocketRocket.xcodeproj; path = ../lib/SocketRocket/SocketRocket.xcodeproj; sourceTree = "<group>"; };
 		B599FCC31656F5020092AFFD /* Anko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Anko.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B599FCC71656F5020092AFFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		B599FCCA1656F5020092AFFD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -97,15 +97,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		79B5077E1CDE32550016C056 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				79B5078B1CDE32550016C056 /* SocketRocket.framework */,
-				79B5078F1CDE32550016C056 /* SRWebSocketTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		79B507931CDE59500016C056 /* Anko */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +105,15 @@
 			);
 			path = Anko;
 			sourceTree = SOURCE_ROOT;
+		};
+		79B507A71CDE609F0016C056 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				79B507AC1CDE609F0016C056 /* SocketRocket.framework */,
+				79B507AE1CDE609F0016C056 /* SRWebSocketTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
 		};
 		B599FCB81656F5020092AFFD = {
 			isa = PBXGroup;
@@ -140,6 +140,7 @@
 				79B5073A1CDE16980016C056 /* SocketRocket.framework */,
 				015FEFCA1682E4DF00DEEFA0 /* libLeap.dylib */,
 				B599FCC71656F5020092AFFD /* Cocoa.framework */,
+				79B507A61CDE609F0016C056 /* SocketRocket.xcodeproj */,
 				B599FCC91656F5020092AFFD /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -161,7 +162,6 @@
 				B599FCD91656F5020092AFFD /* AppDelegate.h */,
 				B599FCDA1656F5020092AFFD /* AppDelegate.m */,
 				B599FCDC1656F5020092AFFD /* MainMenu.xib */,
-				79B5077D1CDE32550016C056 /* SocketRocket.xcodeproj */,
 				B599FCEA1656F7290092AFFD /* Leap Files */,
 				79B507931CDE59500016C056 /* Anko */,
 				B599FCCE1656F5020092AFFD /* Supporting Files */,
@@ -235,8 +235,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 79B5077E1CDE32550016C056 /* Products */;
-					ProjectRef = 79B5077D1CDE32550016C056 /* SocketRocket.xcodeproj */;
+					ProductGroup = 79B507A71CDE609F0016C056 /* Products */;
+					ProjectRef = 79B507A61CDE609F0016C056 /* SocketRocket.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -247,18 +247,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		79B5078B1CDE32550016C056 /* SocketRocket.framework */ = {
+		79B507AC1CDE609F0016C056 /* SocketRocket.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SocketRocket.framework;
-			remoteRef = 79B5078A1CDE32550016C056 /* PBXContainerItemProxy */;
+			remoteRef = 79B507AB1CDE609F0016C056 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		79B5078F1CDE32550016C056 /* SRWebSocketTests.xctest */ = {
+		79B507AE1CDE609F0016C056 /* SRWebSocketTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = SRWebSocketTests.xctest;
-			remoteRef = 79B5078E1CDE32550016C056 /* PBXContainerItemProxy */;
+			remoteRef = 79B507AD1CDE609F0016C056 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
