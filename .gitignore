@@ -27,3 +27,7 @@ emscripten/
 !*.xcodeproj/project.pbxproj
 !*.xcworkspace/contents.xcworkspacedata
 
+
+web/frontend/node_modules
+web/api/node_modules
+

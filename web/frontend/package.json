@@ -1,0 +1,27 @@
+{
+  "name": "WebMDK",
+  "version": "0.0.1",
+  "description": "MDK-Script(MDK JSON) running environment for mobile web browser.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Yabu Kiyohide",
+  "license": "Proprietary",
+  "bugs": {
+    "url": ""
+  },
+  "dependencies": {
+    "browser-sync": "^1.9.2",
+    "gulp": "^3.8.5",
+    "gulp-ejs": "^2.1.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-pleeease": "^1.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-tsc": "^1.1.5",
+    "gulp-typescript": "^2.10.0",
+    "typescript": "^1.7.5"
+  }
+}

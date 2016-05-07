@@ -24,5 +24,6 @@
     <Topics />
     <IgnoredPaths>
         <Path src=".metadata" />
+        <Path src=".DS_Store" />
     </IgnoredPaths>
 </Package>
