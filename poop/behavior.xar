@@ -54,7 +54,6 @@ class MyClass(GeneratedClass):
         self.video = None
         self.photoCapture = None
 
-        self.stopEye()
         pass
 
     def onInput_onStart(self, url):
@@ -81,7 +80,6 @@ class MyClass(GeneratedClass):
 
         if self.isVirtualRobot == False:
             self.initRecoding()
-            self.sendEye()
             pass
         pass
 
@@ -166,7 +164,6 @@ class MyClass(GeneratedClass):
     def disconnectionMethod(self):
         self.freez = True
         self.sendEyeBlocking = True
-        self.stopEye()
         self.output_disconnection()
         pass
 
@@ -304,53 +301,7 @@ class MyClass(GeneratedClass):
         t=threading.Timer(30,self.sendPing)
         t.start()
         pass
-    ## ---- SEND PING ---- ##
-
-
-    ## ---- ROBOT EYE LOOP ---- ##
-    def sendEyeTmp(self):
-        self.logger.info('send_eye_______2')
-        self.video.subscribeCamera('camName', 0, 1)
-        pass
-
-    def sendEye(self):
-        if self.sendEyeBlocking == False:
-            import Image
-
-            self.logger.info("____________send eye____________")
-            #INIT DATA
-            tmpDir = os.path.join(self.framemanager.getBehaviorPath(self.behaviorId), "./html/tmp_picture")
-
-            picture = self.video.getImageRemote(self.camObj)
-            imgSize = (int(picture[0]),int(picture[1]))
-            pngImg = Image.fromstring('RGB', imgSize, picture[6])
-
-            savePath = tmpDir+"/tmp_eye.jpg"
-
-            pngImg.save(savePath)
-
-            imageData = open(savePath).read()
-
-            if imageData != "":
-                sendData  = '[!dataURL!]||||'
-                sendData += 'eye_image||||'
-                sendData += 'data:image/jpeg;base64,'+base64.b64encode(imageData)+'||||'
-                sendData += str(self.connectonToken)
-
-                self.ws.send(sendData)
-                pass
-        else:
-            pass
-
-        self.eyeTimer=threading.Timer(0.1,self.sendEye)
-        self.eyeTimer.start()
-        pass
-
-    def stopEye(self):
-        if self.eyeTimer != None:
-            self.eyeTimer.cancel()
-        pass
-    ## ---- ROBOT EYE LOOP ---- ##]]>
+    ## ---- SEND PING ---- ##]]>
 </content>
                             </script>
                             <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
