@@ -23,6 +23,7 @@ emscripten/
 .DS_Store
 
 # Xcode
+UserInterfaceState.xcuserstate
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj
 !*.xcworkspace/contents.xcworkspacedata
@@ -31,3 +32,16 @@ emscripten/
 web/frontend/node_modules
 web/api/node_modules
 
+
+server/node_modules
+server/bower_components
+server/lib-cov
+*.seed
+*.log
+*.out
+*.pid
+server/npm-debug.log
+server/.netbeans
+server/nbproject
+server/.idea
+server/.node_history
