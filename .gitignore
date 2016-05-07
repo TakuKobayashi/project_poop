@@ -21,3 +21,9 @@ emscripten/
 
 # OSX
 .DS_Store
+
+# Xcode
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcworkspace/contents.xcworkspacedata
+
