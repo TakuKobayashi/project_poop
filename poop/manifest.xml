@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<package version="1.0.1" uuid="marionette-e4b1ba">
+<package uuid="marionette-e4b1ba" version="1.0.1">
  <names>
   <name lang="en_US">marionette</name>
  </names>
@@ -10,8 +10,7 @@
   <language>en_US</language>
  </descriptionLanguages>
  <contents>
-  <behaviorContent path="test">
-   <userRequestable/>
+  <behaviorContent path=".">
    <nature>interactive</nature>
    <triggerSentences/>
    <loadingResponses/>

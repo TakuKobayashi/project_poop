@@ -23,6 +23,7 @@
         <File name="V8" src="V8.aif" />
         <File name="V8" src="V8.mp3" />
         <File name="icon" src="icon.png" />
+        <File name="V8" src="V8.png" />
     </Resources>
     <Topics />
     <IgnoredPaths>
