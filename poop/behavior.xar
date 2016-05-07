@@ -27,14 +27,14 @@ class MyClass(GeneratedClass):
 
     def onLoad(self):
         self.freez = False
-        self.connectonToken = None
+        self.connectionToken = None
         self.framemanager = ALProxy("ALFrameManager")
         self.ws = None
         pass
 
     def onUnload(self):
         self.freez = False
-        self.connectonToken = None
+        self.connectionToken = None
         self.framemanager = None
         self.ws = None
         pass
@@ -50,23 +50,23 @@ class MyClass(GeneratedClass):
 
     def onInput_inputCompleteAction(self):
         self.freez = False
-        self.logger.info("ACTION_COMPLETE token is "+ str(self.connectonToken))
+        self.logger.info("ACTION_COMPLETE token is "+ str(self.connectionToken))
 
         pass
 
     def onInput_inputCompleteConnection(self):
         self.freez = False
-        self.logger.info("ACTION_COMPLETE token is "+ str(self.connectonToken))
+        self.logger.info("ACTION_COMPLETE token is "+ str(self.connectionToken))
 
         pass
 
     ## ---- START ROBOT ACTIONS ---- ##
     def getTokenMethod(self, connection_token):
         self.freez = True
-        self.connectonToken = str(connection_token)
-        self.logger.info("GET CONNECTION TOKEN ["+self.connectonToken+"]")
+        self.connectionToken = str(connection_token)
+        self.logger.info("GET CONNECTION TOKEN ["+self.connectionToken+"]")
 
-        self.output_get_connection_token(self.connectonToken)
+        self.output_get_connection_token(self.connectionToken)
         pass
 
     def connectionSuccessMethod(self):
