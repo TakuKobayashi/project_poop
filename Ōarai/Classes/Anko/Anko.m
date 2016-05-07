@@ -18,6 +18,7 @@
 	
 	SRWebSocket *socket;
 	bool isSockedOpened;
+	bool isRightHandSwipingToRight;
 }
 
 - (id)init
@@ -25,6 +26,7 @@
 	
 	isHandsClose = false;
 	isSockedOpened = false;
+	isRightHandSwipingToRight = false;
 	
     self = [super init];
 	
@@ -76,6 +78,8 @@
 - (void)onConnect:(NSNotification *)notification
 {
     NSLog(@"Connected");
+	LeapController *notificationController = [notification object];
+	[notificationController enableGesture:LEAP_GESTURE_TYPE_SWIPE enable:YES];
 }
 
 - (void)onFrame:(NSNotification *)notification
@@ -90,6 +94,12 @@
 			[socket send:@"{\"action\":\"V8\", \"data\":\"null\"}"];
 		}
 		NSLog(@"V8!");
+		
+	} else if([self swipeRightHandToRight:frame]) {
+		if (isSockedOpened) {
+			[socket send:@"{\"action\":\"change_eyecolor\", \"data\":\"red\"}"];
+		}
+		NSLog(@"Right!");
 	}
 	
 }
@@ -112,7 +122,7 @@
 
 #pragma mark - Gestures
 
-- (BOOL) closeHandsGesture: (LeapFrame *)frame {
+- (BOOL)closeHandsGesture: (LeapFrame *)frame {
 	
 	if ([[frame hands] count] > 1) {
 		LeapHand *hand1 = [[frame hands] objectAtIndex:0];
@@ -132,6 +142,32 @@
 	}
 	
 	isHandsClose = false;
+	return false;
+	
+}
+
+
+
+- (BOOL)swipeRightHandToRight: (LeapFrame *)frame {
+	
+	for (LeapGesture *gesture in [frame gestures:nil]) {
+		if (gesture.type == LEAP_GESTURE_TYPE_SWIPE) {
+			LeapSwipeGesture *swipeGesture = (LeapSwipeGesture *)gesture;
+			LeapHand *hand = [[swipeGesture hands] objectAtIndex:0];
+			if (hand.isRight && swipeGesture.direction.x > 0) {
+				if (!isRightHandSwipingToRight) {
+					isRightHandSwipingToRight = true;
+					return true;
+					
+				} else {
+					return false;
+				}
+			}
+		}
+		
+	}
+	
+	isRightHandSwipingToRight = false;
 	return false;
 	
 }
