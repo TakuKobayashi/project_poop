@@ -7,16 +7,28 @@
     <link rel="stylesheet" href="/css/app.css">
     <script src="/js/app.js"></script>
 </head>
-<body style="background-color:red!important;">
+<body>
 
-<div id="message" style="color:#fff;">
-  
+<div id="wrap">
+  <div class="inside" id="textfield">
+    
+  </div>
+  <ul id="emotions">
+    <li class="anger"><div class="gauge"></div><div class="label">ANGER</div></li>
+    <li class="disgust"><div class="gauge"></div><div class="label">DISGUST</div></li>
+    <li class="fear"><div class="gauge"></div><div class="label">FEAR</div></li>
+    <li class="joy"><div class="gauge"></div><div class="label">JOY</div></li>
+    <li class="sadness"><div class="gauge"></div><div class="label">SADNESS</div></li>
+  </ul>
 </div>
+
+<input type="range" min=-1 max=1 step=0.01 id="neck" name="range" style="width:200px;position:fixed;top:0;left:0;">
 
 <img class="brand" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IuODrOOCpOODpOODvF8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIj48c3R5bGUgdHlwZT0idGV4dC9jc3MiPi5zdDB7ZmlsbDojRkZGRkZGO308L3N0eWxlPjxnPjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00NTEuNywyODAuM2wtMTguMiwxMi42bC0xLjQtMC44YzAsMC0wLjEsMC0wLjEtMC4xbC0xNzYuMy05OUw3OS4zLDI5MmMwLDAtMC4xLDAtMC4xLDAuMWwtMS40LDAuOGwtMS40LTAuOWMwLDAsMCwwLDAsMGwtMTYuNS0xMS41Yy0wLjUsMi4zLTEsNC42LTEuNCw3Yy0yLjcsMTUuNy0yLjMsMzMuMSwxLDUyLjFjMy4yLDE5LDguNywzNS41LDE2LjMsNDkuNmMzLDUuNCw2LjQsMTAuNSw5LjksMTUuMmMwLjgsMSwxLjcsMiwyLjUsM2MxMS4xLDcuMSwyMi43LDExLjcsMzUsMTMuOGM1LjgsNy43LDEyLjIsMTUuMSwxOS40LDIyLjFjMzIsMzEuMyw2OS44LDQ2LjksMTEzLjIsNDYuOXM4MS4yLTE1LjYsMTEzLjQtNDYuOWM3LjItNywxMy42LTE0LjQsMTkuNC0yMi4xYzEyLjItMi4xLDIzLjgtNi43LDM0LjktMTMuOGMwLjgtMSwxLjctMiwyLjUtM2MzLjYtNC43LDYuOS05LjgsOS45LTE1LjJjNy42LTE0LjEsMTMuMS0zMC42LDE2LjMtNDkuNmMzLjMtMTksMy42LTM2LjMsMS01Mi4xQzQ1Mi43LDI4NSw0NTIuMiwyODIuNyw0NTEuNywyODAuM3ogTTIxNS4yLDMzNi40YzAsMC45LDAsMS45LDAsMi45YzAsMTIuOC0xLjQsMjQuMy00LjEsMzQuNGMtOS40LDMuMi0xOC44LDQuOC0yOC4zLDQuOGMtOS42LDAtMTkuMi0xLjYtMjktNC44Yy0xLTIuNS0xLjktNS0yLjgtNy42Yy0yLjUtOC4xLTQuMy0xNi45LTUuNS0yNi41YzAtMC4xLDAtMC4yLDAtMC4zYy0wLjItMS0wLjMtMi0wLjQtMi45YzAtMC40LDAtMC43LDAtMWMtMC42LTkuOCwyLjEtMTguMiw4LjEtMjUuM2M2LjQtNy41LDE0LjctMTEuMiwyNC43LTExLjJjOS45LDAsMTguNiwzLjcsMjYsMTEuMmM3LDcuMSwxMC44LDE1LjUsMTEuMywyNS4zQzIxNS4yLDMzNS43LDIxNS4yLDMzNiwyMTUuMiwzMzYuNHogTTI3NS4zLDQ0Mi4zYy01LjMsNS4zLTExLjgsOC0xOS41LDhjLTcuNiwwLTE0LjItMi43LTE5LjYtOGMtMC45LTEtMS44LTItMi42LTNjMTQuNCw2LjEsMjkuMiw2LjEsNDQuNSwwQzI3Ny4yLDQ0MC4yLDI3Ni4zLDQ0MS4yLDI3NS4zLDQ0Mi4zeiBNMzY2LjYsMzM1LjRjMCwwLjMsMCwwLjYsMCwxYy0wLjEsMC45LTAuMiwxLjktMC40LDIuOWMtMS42LDEyLjgtNC4zLDI0LjMtOC4zLDM0LjRjLTkuOCwzLjItMTkuNCw0LjgtMjksNC44Yy05LjUsMC0xOC45LTEuNi0yOC4zLTQuOGMtMC43LTIuNS0xLjMtNS0xLjgtNy42Yy0xLjYtOC4xLTIuMy0xNi45LTIuMy0yNi41YzAtMC4xLDAtMC4yLDAtMC4zYzAtMSwwLTIsMC0yLjljMC0wLjQsMC0wLjcsMC0xYzAuNi05LjgsNC4zLTE4LjIsMTEuMy0yNS4zYzcuNC03LjUsMTYtMTEuMiwyNi0xMS4yczE4LjEsMy43LDI0LjYsMTEuMkMzNjQuNCwzMTcuMiwzNjcuMiwzMjUuNiwzNjYuNiwzMzUuNHoiLz48Zz48cG9seWdvbiBjbGFzcz0ic3QwIiBwb2ludHM9IjcuOCwyMTMuMiAxNy4zLDI0NC41IDc0LDI4My43IDY2LjgsMjUwLjYgIi8+PHBvbHlnb24gY2xhc3M9InN0MCIgcG9pbnRzPSIxNTYuMywxMzEuMiAxODIuNywxMTguNyA1MCw1MC41IDU3LjcsNzUuOSAiLz48cG9seWdvbiBjbGFzcz0ic3QwIiBwb2ludHM9IjI1My4xLDE4OC40IDI1My4xLDE1Ny41IDcyLjIsMjUwLjQgNzkuOSwyODUuNiAiLz48cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjU1LjgsMTUwLjFsMS4xLDAuN2MwLDAsMCwwLDAuMSwwbDE4NS4yLDk1bDI1LjctMTYuMWwzNS4xLTIyLjNsLTE0OC43LTcwLjdjMCwwLDAsMCwwLDBsMCwwbC00LjYtMi4ybDAsMEwzMTcsMTE4LjlsMTQyLjYtNzMuM2wtNTkuOS0yNC4zTDI1NS44LDg5LjdMMTExLjksMjEuM0w1Miw0NS42bDE0Mi43LDczLjNsLTE4Niw4OC41bDYwLjcsMzguNWwxODMuOC05NC4zTDI1NS44LDE1MC4xeiBNNDM5LjgsMjA2LjNjMS0xLDIuNi0xLjUsNC44LTEuNWMyLjIsMCw0LjQsMC41LDYuNSwxLjVjMiwxLDMuNCwyLjEsNC4xLDMuNWMwLjcsMS4zLDAuNiwyLjUtMC40LDMuNWMtMS4xLDEtMi43LDEuNS00LjksMS41Yy0yLjIsMC00LjQtMC41LTYuNC0xLjVjLTIuMS0xLTMuNi0yLjEtNC4zLTMuNUM0MzguNiwyMDguNCw0MzguNywyMDcuMiw0MzkuOCwyMDYuM3ogTTQwMS40LDQwLjljMC42LTAuNiwxLjYtMC45LDIuOS0wLjljMS4zLDAsMi43LDAuMyw0LDAuOWMxLjIsMC41LDIsMS4yLDIuNCwyLjFjMC40LDAuOCwwLjQsMS41LTAuMSwyYy0wLjcsMC42LTEuNywwLjktMy4xLDAuOWMtMS4zLDAtMi42LTAuMy0zLjktMC45Yy0xLjItMC41LTIuMS0xLjItMi41LTJDNDAwLjcsNDIuMSw0MDAuOCw0MS40LDQwMS40LDQwLjl6IE0xMTAuMSw0M2MtMC40LDAuOC0xLjMsMS41LTIuNSwyYy0xLjIsMC42LTIuNSwwLjktMy45LDAuOXMtMi40LTAuMy0zLjEtMC45Yy0wLjUtMC41LTAuNi0xLjItMC4xLTJjMC40LTAuOSwxLjItMS42LDIuNC0yLjFjMS4zLTAuNiwyLjctMC45LDQtMC45YzEuMywwLDIuMywwLjMsMi45LDAuOUMxMTAuNSw0MS40LDExMC42LDQyLjEsMTEwLjEsNDN6IE03MiwyMDkuN2MtMC43LDEuMy0yLjEsMi41LTQuMywzLjVjLTIsMS00LjIsMS41LTYuNCwxLjVjLTIuMiwwLTMuOS0wLjUtNC45LTEuNWMtMS0xLTEuMS0yLjEtMC40LTMuNWMwLjctMS4zLDIuMS0yLjUsNC4xLTMuNWMyLjEtMSw0LjMtMS41LDYuNS0xLjVjMi4yLDAsMy44LDAuNSw0LjgsMS41QzcyLjUsMjA3LjIsNzIuNywyMDguNCw3MiwyMDkuN3oiLz48cG9seWdvbiBjbGFzcz0ic3QwIiBwb2ludHM9IjQzOS4zLDI1MC40IDI1OC40LDE1Ny41IDI1OC40LDE4OC40IDQzMS42LDI4NS42ICIvPjxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iNTAzLjgsMjEzLjIgNDcwLjcsMjM0LjIgNDQ0LjcsMjUwLjYgNDM3LjUsMjgzLjcgNDk0LjIsMjQ0LjUgIi8+PHBvbHlnb24gY2xhc3M9InN0MCIgcG9pbnRzPSIzNTUuMywxMzEuMiA0NTMuNyw3NS45IDQ2MS41LDUwLjYgMzI5LDExOC43ICIvPjwvZz48L2c+PC9zdmc+" alt="">
 <script>
   
-  
+  var $emotions = $("#emotions");
+  var $textfield = $("#textfield");
   var ws = new WebSocket('ws://taptappun.cloudapp.net:3001');
   // obj はなに入れても文字列で送られます
   
@@ -30,9 +42,34 @@
       if(!!tmp.tabControl && tmp.tabControl == "reload"){
         location.reload();    
       }
+      
+      if(!!tmp.textMessage){
+        $("#textfield").empty();
+        tmp.textMessage.forEach(function(t,i){
+          var $tmp = $("<span />").text(t+" ");
+          setTimeout(function(){
+            $tmp.addClass("show")
+          },i*200);
+          $("#textfield").append($tmp);
+        })
+      }
+      
+      
     }catch(e){console.log(e)
     }
   };
+  
+  
+  
+  var ws = new WebSocket('ws://taptappun.cloudapp.net:3001');
+  // obj はなに入れても文字列で送られます
+  
+  ws.onmessage = function (event) {
+    // 送られてきたdataを取得
+    console.log(event.data);
+  };
+  
+
 </script>
 </body>
 </html>
