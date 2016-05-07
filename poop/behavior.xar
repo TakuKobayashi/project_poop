@@ -4662,7 +4662,6 @@ class MyClass(GeneratedClass):
                                                                     <Resource name="Stiffness" type="Lock" timeout="0" />
                                                                 </Box>
                                                                 <Box name="Go to position new V8_2" id="1" localization="8" tooltip="Robot will go to the position new V8_2&lt;br/&gt;Position description : " x="342" y="230">
-                                                                    <bitmap></bitmap>
                                                                     <script language="4">
                                                                         <content>
                                                                             <![CDATA[]]>
@@ -4729,7 +4728,6 @@ class MyClass(GeneratedClass):
                                                                     </Timeline>
                                                                 </Box>
                                                                 <Box name="Go to position new V8_3" id="2" localization="8" tooltip="Robot will go to the position new V8_3&lt;br/&gt;Position description : " x="514" y="245">
-                                                                    <bitmap></bitmap>
                                                                     <script language="4">
                                                                         <content>
                                                                             <![CDATA[]]>
@@ -4796,7 +4794,6 @@ class MyClass(GeneratedClass):
                                                                     </Timeline>
                                                                 </Box>
                                                                 <Box name="Go to position new V8_1" id="4" localization="8" tooltip="Robot will go to the position new V8_1&lt;br/&gt;Position description : " x="244" y="397">
-                                                                    <bitmap></bitmap>
                                                                     <script language="4">
                                                                         <content>
                                                                             <![CDATA[]]>
@@ -4863,7 +4860,6 @@ class MyClass(GeneratedClass):
                                                                     </Timeline>
                                                                 </Box>
                                                                 <Box name="Go to position new V8_2_" id="5" localization="8" tooltip="Robot will go to the position new V8_2_&lt;br/&gt;Position description : " x="473" y="413">
-                                                                    <bitmap></bitmap>
                                                                     <script language="4">
                                                                         <content>
                                                                             <![CDATA[]]>
