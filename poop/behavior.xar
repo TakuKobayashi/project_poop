@@ -30,6 +30,7 @@ class MyClass(GeneratedClass):
         self.connectionToken = None
         self.framemanager = ALProxy("ALFrameManager")
         self.ws = None
+        self.ws_connection_retry = 0
         pass
 
     def onUnload(self):
@@ -37,6 +38,7 @@ class MyClass(GeneratedClass):
         self.connectionToken = None
         self.framemanager = None
         self.ws = None
+        self.ws_connection_retry = 0
         pass
 
     def onInput_onStart(self, url):
@@ -249,7 +251,12 @@ class MyClass(GeneratedClass):
         pass
 
     def ws_on_error(self, ws, error):
-        self.output_connection_error()
+        if self.ws_connection_retry < 3 :
+            self.logger.info('reconnect ws')
+            self.ws_connection_retry = self.ws_connection_retry + 1
+            self.init_websocket_connection()
+        else:
+            self.output_connection_error()
         pass
 
     def ws_on_close(self, ws):
