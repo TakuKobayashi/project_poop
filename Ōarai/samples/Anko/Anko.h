@@ -10,7 +10,7 @@
 #import "LeapObjectiveC.h"
 #import "SocketRocket/SRWebSocket.h"
 
-@interface Sample : NSObject<LeapListener>
+@interface Anko : NSObject<LeapListener>
 
 -(void)run;
 

@@ -6,13 +6,13 @@
 * between Leap Motion and you, your company or other organization.             *
 \******************************************************************************/
 
-#import "Sample.h"
+#import "Anko.h"
 
-@interface Sample () <SRWebSocketDelegate>
+@interface Anko () <SRWebSocketDelegate>
 
 @end
 
-@implementation Sample
+@implementation Anko
 {
     LeapController *controller;
     NSArray *fingerNames;

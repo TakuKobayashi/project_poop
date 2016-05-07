@@ -8,11 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class Sample;
+@class Anko;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (nonatomic, strong, readwrite)IBOutlet NSWindow *window;
-@property (nonatomic, strong, readwrite)Sample *sample;
+@property (nonatomic, strong, readwrite)Anko *anko;
 
 @end
