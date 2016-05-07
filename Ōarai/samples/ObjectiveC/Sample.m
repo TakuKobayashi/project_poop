@@ -117,26 +117,14 @@
 
     // Get the most recent frame and report some basic information
     LeapFrame *frame = [aController frame:0];
-
 	
-	if ([[frame hands] count] > 1) {
-		LeapHand *hand1 = [[frame hands] objectAtIndex:0];
-		LeapHand *hand2 = [[frame hands] objectAtIndex:1];
-		
-		if (fabsf(hand1.palmPosition.x - hand2.palmPosition.x) < 50) {
-			if (!isHandsClose) {
-				isHandsClose = true;
-				[socket send:@"{\"action\":\"V8\", \"data\":\"null\"}"];
-				NSLog(@"V8!");
-				
-			}
-			
-			return;
+	if ([self closeHandsGesture:frame]) {
+		if (isSockedOpened) {
+			[socket send:@"{\"action\":\"V8\", \"data\":\"null\"}"];
 		}
-		
+		NSLog(@"V8!");
 	}
 	
-	isHandsClose = false;
 }
 
 - (void)onFocusGained:(NSNotification *)notification
@@ -163,6 +151,30 @@
         default:
             return @"STATE_INVALID";
     }
+}
+
+- (BOOL) closeHandsGesture: (LeapFrame *)frame {
+	
+	if ([[frame hands] count] > 1) {
+		LeapHand *hand1 = [[frame hands] objectAtIndex:0];
+		LeapHand *hand2 = [[frame hands] objectAtIndex:1];
+		
+		if (fabsf(hand1.palmPosition.x - hand2.palmPosition.x) < 50) {
+			if (!isHandsClose) {
+				isHandsClose = true;
+				return true;
+				
+			} else {
+				return false;
+			}
+			
+		}
+		
+	}
+	
+	isHandsClose = false;
+	return false;
+	
 }
 
 @end
