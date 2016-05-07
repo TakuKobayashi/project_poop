@@ -8,10 +8,6 @@
 
 #import "Anko.h"
 
-@interface Anko () <SRWebSocketDelegate>
-
-@end
-
 @implementation Anko
 {
     LeapController *controller;
