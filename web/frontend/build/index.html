@@ -92,6 +92,17 @@
         
         ws.send(JSON.stringify({"textMessage":result.transcript.split(" ")}))
         if(!!result.transcript.match("V8")) ws.send(JSON.stringify({"action":"V8","data":null}));
+        
+        if(!!result.transcript.toLowerCase().match("mad max")){
+          
+          setTimeout(function(){
+            ws.send(JSON.stringify({"textMessage":["V8!!","V8!!","V8!!","V8!!","V8!!","V8!!","V8!!","V8!!","V8!!","V8!!"]}))
+          },2000);
+          
+          setTimeout(function(){
+            ws.send(JSON.stringify({"action":"V8","data":null}))
+          },3000);
+        }
         $("body").addClass("result");
         $.ajax({
           type: "GET",
