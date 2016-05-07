@@ -6,12 +6,13 @@
 * between Leap Motion and you, your company or other organization.             *
 \******************************************************************************/
 
-#import <Foundation/Foundation.h>
-#import "LeapObjectiveC.h"
-#import "SocketRocket/SRWebSocket.h"
+#import <Cocoa/Cocoa.h>
 
-@interface Sample : NSObject<LeapListener>
+@class Anko;
 
--(void)run;
+@interface AppDelegate : NSObject <NSApplicationDelegate>
+
+@property (nonatomic, strong, readwrite)IBOutlet NSWindow *window;
+@property (nonatomic, strong, readwrite)Anko *anko;
 
 @end

@@ -6,13 +6,9 @@
 * between Leap Motion and you, your company or other organization.             *
 \******************************************************************************/
 
-#import "Sample.h"
+#import "Anko.h"
 
-@interface Sample () <SRWebSocketDelegate>
-
-@end
-
-@implementation Sample
+@implementation Anko
 {
     LeapController *controller;
     NSArray *fingerNames;
@@ -58,6 +54,8 @@
 	
 }
 
+#pragma mark - SRWebSocketDelegate Calbacks
+
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
 	isSockedOpened = true;
 	[webSocket send:@"Hello, world! from Mac"];
@@ -78,37 +76,6 @@
 - (void)onConnect:(NSNotification *)notification
 {
     NSLog(@"Connected");
-//    LeapController *aController = (LeapController *)[notification object];
-//    [aController enableGesture:LEAP_GESTURE_TYPE_CIRCLE enable:YES];
-//    [aController enableGesture:LEAP_GESTURE_TYPE_KEY_TAP enable:YES];
-//    [aController enableGesture:LEAP_GESTURE_TYPE_SCREEN_TAP enable:YES];
-//    [aController enableGesture:LEAP_GESTURE_TYPE_SWIPE enable:YES];
-}
-
-- (void)onDisconnect:(NSNotification *)notification
-{
-    //Note: not dispatched when running in a debugger.
-    NSLog(@"Disconnected");
-}
-
-- (void)onServiceConnect:(NSNotification *)notification
-{
-    NSLog(@"Service Connected");
-}
-
-- (void)onServiceDisconnect:(NSNotification *)notification
-{
-    NSLog(@"Service Disconnected");
-}
-
-- (void)onDeviceChange:(NSNotification *)notification
-{
-    NSLog(@"Device Changed");
-}
-
-- (void)onExit:(NSNotification *)notification
-{
-    NSLog(@"Exited");
 }
 
 - (void)onFrame:(NSNotification *)notification
@@ -117,36 +84,14 @@
 
     // Get the most recent frame and report some basic information
     LeapFrame *frame = [aController frame:0];
-
 	
-	if ([[frame hands] count] > 1) {
-		LeapHand *hand1 = [[frame hands] objectAtIndex:0];
-		LeapHand *hand2 = [[frame hands] objectAtIndex:1];
-		
-		if (fabsf(hand1.palmPosition.x - hand2.palmPosition.x) < 50) {
-			if (!isHandsClose) {
-				isHandsClose = true;
-				[socket send:@"{\"action\":\"V8\", \"data\":\"null\"}"];
-				NSLog(@"V8!");
-				
-			}
-			
-			return;
+	if ([self closeHandsGesture:frame]) {
+		if (isSockedOpened) {
+			[socket send:@"{\"action\":\"V8\", \"data\":\"null\"}"];
 		}
-		
+		NSLog(@"V8!");
 	}
 	
-	isHandsClose = false;
-}
-
-- (void)onFocusGained:(NSNotification *)notification
-{
-    NSLog(@"Focus Gained");
-}
-
-- (void)onFocusLost:(NSNotification *)notification
-{
-    NSLog(@"Focus Lost");
 }
 
 + (NSString *)stringForState:(LeapGestureState)state
@@ -163,6 +108,32 @@
         default:
             return @"STATE_INVALID";
     }
+}
+
+#pragma mark - Gestures
+
+- (BOOL) closeHandsGesture: (LeapFrame *)frame {
+	
+	if ([[frame hands] count] > 1) {
+		LeapHand *hand1 = [[frame hands] objectAtIndex:0];
+		LeapHand *hand2 = [[frame hands] objectAtIndex:1];
+		
+		if (fabsf(hand1.palmPosition.x - hand2.palmPosition.x) < 50) {
+			if (!isHandsClose) {
+				isHandsClose = true;
+				return true;
+				
+			} else {
+				return false;
+			}
+			
+		}
+		
+	}
+	
+	isHandsClose = false;
+	return false;
+	
 }
 
 @end

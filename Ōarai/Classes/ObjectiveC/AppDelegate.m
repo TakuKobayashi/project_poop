@@ -7,18 +7,18 @@
 \******************************************************************************/
 
 #import "AppDelegate.h"
-#import "Sample.h"
+#import "Anko.h"
 
 @implementation AppDelegate
 
 // Xcode 4.2 warns if we do not explicitly synthesize
 @synthesize window = _window;
-@synthesize sample = _sample; // must retain for notifications
+@synthesize anko = _anko; // must retain for notifications
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    _sample = [[Sample alloc] init];
-    [_sample run];
+    _anko = [[Anko alloc] init];
+    [_anko run];
 }
 
 @end
