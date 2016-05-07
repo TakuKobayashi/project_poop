@@ -6,8 +6,10 @@
 | change_eyecolor | string (red, blue, green)  | {"action":"change_eyecolor", "data":"red"}  |
 | move_rshoulder  | string [Roll(float), Pitch(float)] | {"action":"move_rshoulder", "data":"[-1.0, -1.0]"} |
 | move_lshoulder  | string [Roll(float), Pitch(float)] | {"action":"move_lshoulder", "data":"[1.0, -1.0]"} |
-| move_relbow  | string [Roll(float), Yaw(float)] | {"action":"move_relbow", "data":"[-1.0, 1.0]"} |
+| move_relbow  | string [Roll(float), Yaw(float)] | {"action":"move_relbow", "data":"[1.0, 1.0]"} |
 | move_lelbow  | string [Roll(float), Yaw(float)] | {"action":"move_lelbow", "data":"[-1.0, -1.0]"} |
+| move_rwrist  | string Yaw(float) | {"action":"move_rwrist", "data":"1.0"} |
+| move_lwrist  | string Yaw(float) | {"action":"move_lwrist", "data":"-1.0"} |
 | reset  | null  | {"action":"reset", "data": null} |
 | V8  | null  | {"action":"V8", "data": null} |
 
