@@ -51,16 +51,16 @@
           ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"red"}));
           break;
         case "disgust":
-          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"green"}));
+          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"purple"}));
           break;
         case "fear":
           ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"blue"}));
           break;
         case "joy":
-          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"red"}));
+          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"green"}));
           break;
         case "sadness":
-          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"green"}));
+          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"cyan"}));
           break;
       } 
   }
@@ -93,7 +93,8 @@
         ws.send(JSON.stringify({"textMessage":result.transcript.split(" ")}))
         if(!!result.transcript.match("V8")) ws.send(JSON.stringify({"action":"V8","data":null}));
         
-        if(!!result.transcript.toLowerCase().match("mad max")){
+        var lower = result.transcript.toLowerCase();
+        if(!!lower.match("mad max")){
           
           setTimeout(function(){
             ws.send(JSON.stringify({"textMessage":["V8!!","V8!!","V8!!","V8!!","V8!!","V8!!","V8!!","V8!!","V8!!","V8!!"]}))
@@ -103,6 +104,16 @@
             ws.send(JSON.stringify({"action":"V8","data":null}))
           },3000);
         }
+        
+        if(!!lower.match("girls") && !!lower.match("panzer")){
+          
+          ws.send(JSON.stringify( {"backgroundImage":"garupan"}))
+          
+          setTimeout(function(){
+            ws.send(JSON.stringify( {"backgroundImage":"remove"}))
+          },2500);
+        }
+        
         $("body").addClass("result");
         $.ajax({
           type: "GET",
