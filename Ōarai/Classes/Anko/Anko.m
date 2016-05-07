@@ -16,6 +16,8 @@
 	
 	bool isHandsClose;
 	
+	int interval;
+	
 	SRWebSocket *socket;
 	bool isSockedOpened;
 	bool isRightHandSwipingToRight;
@@ -25,6 +27,9 @@
 {
 	
 	isHandsClose = false;
+	
+	interval = 0;
+	
 	isSockedOpened = false;
 	isRightHandSwipingToRight = false;
 	
@@ -89,17 +94,21 @@
     // Get the most recent frame and report some basic information
     LeapFrame *frame = [aController frame:0];
 	
+	interval++;
+	if (interval >= 30) {
+		interval = 0;
+	}
+	
+	if (interval == 0) {
+		[self setHandsPositions:frame];
+	}
+	
 	if ([self closeHandsGesture:frame]) {
 		if (isSockedOpened) {
 			[socket send:@"{\"action\":\"V8\", \"data\":\"null\"}"];
 		}
 		NSLog(@"V8!");
 		
-	} else if([self swipeRightHandToRight:frame]) {
-		if (isSockedOpened) {
-			[socket send:@"{\"action\":\"change_eyecolor\", \"data\":\"red\"}"];
-		}
-		NSLog(@"Right!");
 	}
 	
 }
@@ -148,27 +157,38 @@
 
 
 
-- (BOOL)swipeRightHandToRight: (LeapFrame *)frame {
+- (void)setHandsPositions: (LeapFrame *)frame {
 	
-	for (LeapGesture *gesture in [frame gestures:nil]) {
-		if (gesture.type == LEAP_GESTURE_TYPE_SWIPE) {
-			LeapSwipeGesture *swipeGesture = (LeapSwipeGesture *)gesture;
-			LeapHand *hand = [[swipeGesture hands] objectAtIndex:0];
-			if (hand.isRight && swipeGesture.direction.x > 0) {
-				if (!isRightHandSwipingToRight) {
-					isRightHandSwipingToRight = true;
-					return true;
-					
-				} else {
-					return false;
-				}
-			}
+	NSArray *array = [frame hands];
+	for (LeapHand *hand in array) {
+		float x = hand.palmPosition.x;
+		float y = hand.palmPosition.y;
+		x /= -100;
+		x += 0.5;
+		if (x < -1) {
+			x = -1;
+		} else if (x > 1) {
+			x = 1;
 		}
 		
+		y -= 300;
+		y /= -250;
+		if (y < -1) {
+			y = -1;
+		} else if (y > 1) {
+			y = 1;
+		}
+		
+		NSString *shoulder = @"shoulder";
+		if (hand.isLeft) {
+			shoulder = [@"move_l" stringByAppendingString:shoulder];
+		} else if (hand.isRight) {
+			shoulder = [@"move_r" stringByAppendingString:shoulder];
+		}
+		
+		NSString *message = [NSString stringWithFormat:@"{\"action\":\"%@\", \"data\":\"[%f, %f]\"}", shoulder, x, y];
+		[socket send:message];
 	}
-	
-	isRightHandSwipingToRight = false;
-	return false;
 	
 }
 
