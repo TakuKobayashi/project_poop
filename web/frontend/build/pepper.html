@@ -33,105 +33,15 @@
   
   ws.onmessage = function (event) {
     // 送られてきたdataを取得
-    console.log(event.data);
-  };
-  
-  function sendEmotion(data){
-    
-      data.tones.sort(  
-        function(a,b){
-          if( a.score < b.score ) return -1;
-          if( a.score > b.score ) return 1;
-          return 0;
-        }
-      )
-      
-      switch(data.tones[0].tone_id){
-        case "anger":
-          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"red"}));
-          break;
-        case "disgust":
-          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"green"}));
-          break;
-        case "fear":
-          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"blue"}));
-          break;
-        case "joy":
-          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"red"}));
-          break;
-        case "sadness":
-          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"green"}));
-          break;
-      } 
-  }
-
-
-  var recognition = new webkitSpeechRecognition();
-  recognition.continuous = true;
-  recognition.lang = 'en';
-  recognition.interimResults = true;
-  var $emotions = $("#emotions");
-  var $textfield = $("#textfield");
-  
-  recognition.onresult = function(event) {
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
-      var result = event.results[event.resultIndex][0];
-      
-      $("#textfield").empty();
-      
-      result.transcript.split(" ").forEach(function(t,i){
-        var $tmp = $("<span />").text(t+" ");
-        setTimeout(function(){
-          $tmp.addClass("show")
-        },i*200);
-        $("#textfield").append($tmp);
-      })
-      
-      if(!!event.results[event.resultIndex].isFinal){
-        console.info("result:",result)
-        if(!!result.transcript.match("V8")) ws.send(JSON.stringify({"action":"V8","data":null}));
-        $("body").addClass("result");
-        $.ajax({
-          type: "GET",
-          data: {text:result.transcript},
-          url:"/api/bmixtone"
-          })
-        .then((res) => {
-          var emotion = res.document_tone.tone_categories[0];
-          sendEmotion(emotion);
-          if(!!emotion){
-            emotion.tones.forEach((t) => {
-              console.log(t.tone_id)
-              var tmp = $emotions.find("."+t.tone_id);
-              tmp.children(".gauge").css("height",t.score*100+"%");
-            })
-          }
-          setTimeout(function(){
-            $("body").removeClass("result");
-            $textfield.find(".show").removeClass("show");
-          },2000);
-          if (!!res) {
-            //def.resolve(res);
-          } else {
-            //def.reject(false);
-          }
-        })
-        .fail( (e) => {
-          //def.reject(false);
-        });
+    var tmp;
+    try{
+      tmp = JSON.parse(event.data);
+      if(!!tmp.tabControl && tmp.tabControl == "reload"){
+        location.reload();    
       }
-      
-      
+    }catch(e){console.log(e)
     }
-  }
-  
-  recognition.start();
-  
-  $("#neck").on("change",function(){
-    console.log();
-    ws.send(JSON.stringify({"action":"reset","data":null}));
-    
-  });
+  };
 </script>
 </body>
 </html>
