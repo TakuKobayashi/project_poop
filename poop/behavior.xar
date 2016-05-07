@@ -256,7 +256,7 @@ class MyClass(GeneratedClass):
         pass
 
     def ws_on_open(self, ws):
-        self.ws_send_message({"action":"robottoken", "data":"none"})
+        self.logger.info('connection open')
         pass
     ## ---- END WEBSOCKET FUNCTIONS ---- ##
 
