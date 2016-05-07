@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="/lib/jquery.js"></script>
+    <link rel="stylesheet" href="/css/app.css">
+    <script src="/js/app.js"></script>
+</head>
+<body>
+
+<div id="wrap">
+  <div class="inside" id="textfield">
+    
+  </div>
+  <ul id="emotions">
+    <li class="anger"><div class="gauge"></div><div class="label">ANGER</div></li>
+    <li class="disgust"><div class="gauge"></div><div class="label">DISGUST</div></li>
+    <li class="fear"><div class="gauge"></div><div class="label">FEAR</div></li>
+    <li class="joy"><div class="gauge"></div><div class="label">JOY</div></li>
+    <li class="sadness"><div class="gauge"></div><div class="label">SADNESS</div></li>
+  </ul>
+</div>
+<script>
+  
+  
+  var ws = new WebSocket('ws://taptappun.cloudapp.net:3001');
+  // obj はなに入れても文字列で送られます
+  
+  ws.onmessage = function (event) {
+    // 送られてきたdataを取得
+    console.log(event.data);
+  };
+  
+  function sendEmotion(data){
+    
+      data.tones.sort(  
+        function(a,b){
+          if( a.score < b.score ) return -1;
+          if( a.score > b.score ) return 1;
+          return 0;
+        }
+      )
+      
+      switch(data.tones[0].tone_id){
+        case "anger":
+          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"red"}));
+          break;
+        case "disgust":
+          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"green"}));
+          break;
+        case "fear":
+          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"blue"}));
+          break;
+        case "joy":
+          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"red"}));
+          break;
+        case "sadness":
+          ws.send(JSON.stringify({"action":"change_eyecolor", "client":"chrome","data":"green"}));
+          break;
+      } 
+  }
+
+
+  var recognition = new webkitSpeechRecognition();
+  recognition.continuous = true;
+  recognition.lang = 'en';
+  var $emotions = $("#emotions");
+  
+  recognition.onresult = function(event) {
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+      var result = event.results[event.resultIndex][0];
+      console.log(result.transcript, result.confidence);
+      $("#textfield").text(result.transcript);
+      
+      if(!!result.transcript.match("V8")) ws.send(JSON.stringify({"action":"V8"}));
+      
+      $.ajax({
+        type: "GET",
+        data: {text:result.transcript},
+        url:"/api/bmixtone"
+        })
+      .then((res) => {
+        var emotion = res.document_tone.tone_categories[0];
+        
+        sendEmotion(emotion);
+        
+        if(!!emotion){
+          emotion.tones.forEach((t) => {
+            console.log(t.tone_id)
+            var tmp = $emotions.find("."+t.tone_id);
+            tmp.children(".gauge").css("height",t.score*100+"%");
+            
+          })
+        }
+        if (!!res) {
+          //def.resolve(res);
+        } else {
+          //def.reject(false);
+        }
+      })
+      .fail( (e) => {
+        //def.reject(false);
+      });
+      
+    }
+  }
+  
+  recognition.start();
+</script>
+</body>
+</html>
