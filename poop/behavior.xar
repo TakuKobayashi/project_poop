@@ -289,18 +289,7 @@ class MyClass(GeneratedClass):
 
         if self.folderName not in sys.path:
             sys.path.append(self.folderName)
-    ## ---- END INITIALIZE ---- ##
-
-
-    ## ---- SEND PING ---- ##
-    def sendPing(self):
-        jsonData = json.dumps({"action":"ping", "data":"none"})
-        self.ws.send(jsonData)
-        self.logger.info("____________send ping____________")
-        t=threading.Timer(30,self.sendPing)
-        t.start()
-        pass
-    ## ---- SEND PING ---- ##]]>
+    ## ---- END INITIALIZE ---- ##]]>
 </content>
                             </script>
                             <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
