@@ -72,3 +72,18 @@ body,html {
     }
   }
 }
+
+.brand {
+  $size: 400px;
+  position: absolute;
+  height:$size;
+  width:$size;
+  margin: $size*-0.5;
+  z-index:100;
+  left:50%;
+  top:calc(50% - 100px);
+  transform:scale(1.8);
+  .ready &{
+    transform:scale(1.5);
+  }
+}
