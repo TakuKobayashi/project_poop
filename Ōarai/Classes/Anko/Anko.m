@@ -163,15 +163,19 @@
 	for (LeapHand *hand in array) {
 		float x = hand.palmPosition.x;
 		float y = hand.palmPosition.y;
-		x /= -100;
-		x += 0.5;
+		if (hand.isLeft) {
+			x += 110;
+		} else if (hand.isRight) {
+			x -= 110;
+		}
+		x /= -50;
 		if (x < -1) {
 			x = -1;
 		} else if (x > 1) {
 			x = 1;
 		}
 		
-		y -= 300;
+		y -= 350;
 		y /= -250;
 		if (y < -1) {
 			y = -1;
