@@ -20,6 +20,9 @@
         <File name="test_websocket" src="lib/websocket/tests/test_websocket.py" />
         <File name="header01" src="lib/websocket/tests/data/header01.txt" />
         <File name="header02" src="lib/websocket/tests/data/header02.txt" />
+        <File name="V8" src="V8.aif" />
+        <File name="V8" src="V8.mp3" />
+        <File name="icon" src="icon.png" />
     </Resources>
     <Topics />
     <IgnoredPaths>
