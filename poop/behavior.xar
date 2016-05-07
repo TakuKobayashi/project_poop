@@ -183,6 +183,10 @@ class MyClass(GeneratedClass):
         self.log("robot will move right shoulder")
         self.output_rshoulder(data)
         pass
+    def V8(self):
+        self.log("Witness me!!!!")
+        self.output_v8()
+        pass
     ## ---- END ROBOT ACTIONS ---- ##
 
 
@@ -231,6 +235,10 @@ class MyClass(GeneratedClass):
         elif target_action == "move_rshoulder":
             if self.freez == False :
                 self.robotMoveRshoulderMethod(target_data)
+            pass
+        elif target_action == "V8":
+            if self.freez == False :
+                self.V8()
             pass
         elif target_action == "disconnection" :
             if self.freez == False :
@@ -357,6 +365,7 @@ class MyClass(GeneratedClass):
                             <Output name="output_byebye" type="1" type_size="1" nature="2" inner="0" tooltip="output_byebye" id="15" />
                             <Output name="output_change_eyecolor" type="3" type_size="1" nature="2" inner="0" tooltip="" id="16" />
                             <Output name="output_leftshoulder" type="2" type_size="2" nature="2" inner="0" tooltip="" id="17" />
+                            <Output name="output_v8" type="1" type_size="1" nature="2" inner="0" tooltip="" id="18" />
                         </Box>
                         <Box name="Connect Infomation" id="14" localization="8" tooltip="connection_infomation&#x0A;" x="223" y="17">
                             <bitmap>media/images/box/box-diagram.png</bitmap>
@@ -7695,7 +7704,7 @@ class MyClass(GeneratedClass):
                             </script>
                             <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
                             <Input name="Set Language_onSet" type="1" type_size="1" nature="2" inner="0" tooltip="This input has been automatically generated&#x0A;by converting several boxes into a single box." id="2" />
-                            <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="" id="3" />
+                            <Output name="onStopped" type="0" type_size="1" nature="1" inner="0" tooltip="" id="3" />
                             <Timeline enable="0">
                                 <BehaviorLayer name="behavior_layer1">
                                     <BehaviorKeyframe name="keyframe1" index="1">
@@ -8502,6 +8511,8 @@ class MyClass(GeneratedClass):
                         <Link inputowner="13" indexofinput="2" outputowner="10" indexofoutput="3" />
                         <Link inputowner="8" indexofinput="2" outputowner="13" indexofoutput="3" />
                         <Link inputowner="9" indexofinput="2" outputowner="8" indexofoutput="3" />
+                        <Link inputowner="10" indexofinput="2" outputowner="1" indexofoutput="18" />
+                        <Link inputowner="1" indexofinput="4" outputowner="9" indexofoutput="3" />
                     </Diagram>
                 </BehaviorKeyframe>
             </BehaviorLayer>
