@@ -269,7 +269,6 @@ class MyClass(GeneratedClass):
 
         websocket.setdefaulttimeout(500)
 
-        #websocketUrl = "ws://localhost:3000/"
         websocketUrl = "ws://taptappun.cloudapp.net:3001/"
 
         self.ws = websocket.WebSocketApp(websocketUrl,
