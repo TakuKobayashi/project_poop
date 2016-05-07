@@ -218,6 +218,10 @@ class MyClass(GeneratedClass):
             if self.freez == False :
                 self.robotTakePictureMethod()
             pass
+        elif target_action == "change_eyecolor":
+            if self.freez == False :
+                self.robotChangeEyecolorMethod()
+            pass
         elif target_action == "disconnection" :
             if self.freez == False :
                 self.disconnectionMethod()
@@ -246,7 +250,8 @@ class MyClass(GeneratedClass):
 
         websocket.setdefaulttimeout(500)
 
-        websocketUrl = "ws://localhost:3000/"
+        #websocketUrl = "ws://localhost:3000/"
+        websocketUrl = "ws://taptappun.cloudapp.net:3001/"
 
         self.ws = websocket.WebSocketApp(websocketUrl,
             on_message = self.ws_on_message,
