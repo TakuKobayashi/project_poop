@@ -104,6 +104,11 @@ class MyClass(GeneratedClass):
         self.output_lshoulder(decoded)
         pass
 
+    def robotReset(self):
+        self.logger.info("robot will reset")
+        self.output_reset()
+        pass
+
     def V8(self):
         self.logger.info("Witness ME!!!!")
         self.output_v8()
@@ -147,6 +152,10 @@ class MyClass(GeneratedClass):
         elif target_action == "move_lshoulder":
             if self.freez == False :
                 self.robotMoveLshoulderMethod(target_data)
+            pass
+        elif target_action == "reset":
+            if self.freez == False :
+                self.robotReset()
             pass
         elif target_action == "V8":
             if self.freez == False :

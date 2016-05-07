@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<package version="0.0.0" uuid="poop-e4b1ba">
+<package version="1.0.0" uuid="marionette-e4b1ba">
  <names>
-  <name lang="en_US">poop</name>
+  <name lang="en_US">marionette</name>
  </names>
  <supportedLanguages>
   <language>en_US</language>
