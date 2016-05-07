@@ -297,16 +297,7 @@ class MyClass(GeneratedClass):
         t=threading.Timer(30,self.sendPing)
         t.start()
         pass
-    ## ---- SEND PING ---- ##
-
-
-    ## ---- ROBOT EYE LOOP ---- ##
-    def sendEyeTmp(self):
-        self.logger.info('send_eye_______2')
-        self.video.subscribeCamera('camName', 0, 1)
-        pass
-
-    ## ---- ROBOT EYE LOOP ---- ##]]>
+    ## ---- SEND PING ---- ##]]>
 </content>
                             </script>
                             <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
