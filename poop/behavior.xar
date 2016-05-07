@@ -28,22 +28,15 @@ class MyClass(GeneratedClass):
     def onLoad(self):
         self.freez = False
         self.connectonToken = None
-        self.ws = None
-        self.eyeTimer = None
-        self.sendEyeBlocking = False
-        self.action_count = 0
         self.framemanager = ALProxy("ALFrameManager")
-        self.memory = ALProxy("ALMemory")
-
+        self.ws = None
         pass
 
     def onUnload(self):
         self.freez = False
         self.connectonToken = None
         self.framemanager = None
-        self.memory = None
         self.ws = None
-
         pass
 
     def onInput_onStart(self, url):
@@ -59,14 +52,11 @@ class MyClass(GeneratedClass):
         self.freez = False
         self.logger.info("ACTION_COMPLETE token is "+ str(self.connectonToken))
 
-        self.ws_send_message({"action":"actioncomplete", "data":str(self.connectonToken)})
         pass
 
     def onInput_inputCompleteConnection(self):
         self.freez = False
         self.logger.info("ACTION_COMPLETE token is "+ str(self.connectonToken))
-
-        self.ws_send_message({"action":"actioncomplete", "data":str(self.connectonToken)})
 
         pass
 
@@ -87,7 +77,6 @@ class MyClass(GeneratedClass):
 
     def disconnectionMethod(self):
         self.freez = True
-        self.sendEyeBlocking = True
         self.output_disconnection()
         pass
 
