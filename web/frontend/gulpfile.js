@@ -74,6 +74,7 @@ gulp.task("server", function() {
         server: {
             baseDir: PUBLIC
         },
+        https: true,
         port: 5000
         ,ui:{port:5001}
     });
@@ -84,14 +85,14 @@ gulp.task("reload", function() { browser.reload() });
 
 //TypeScript
 gulp.task('typescript', function(){
-	gulp.src([DEV +'/ts/webmdk.ts'])
+	gulp.src([DEV +'/ts/app.ts'])
 	.pipe(plumber())
 	.pipe(typescript({
 		sourceMap: true,
 		sourceRoot: '/ts/',
 		declaration: true ,
 		removeComments: true,
-		out: "webmdk.js"}))
+		out: "app.js"}))
 	.pipe(gulp.dest((PUBLIC + "/js")))
 });
 
