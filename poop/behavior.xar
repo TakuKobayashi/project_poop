@@ -171,7 +171,7 @@ class MyClass(GeneratedClass):
         pass
 
     def robotChangeEyecolorMethod(self, eyecolor):
-        decoded = urllib.unquote(talk_text)
+        decoded = urllib.unquote(eyecolor)
 
         self.log(str(decoded))
         self.log("robot will change eyecolor")
