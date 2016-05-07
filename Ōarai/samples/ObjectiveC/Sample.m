@@ -40,8 +40,8 @@
 - (void)run
 {
     controller = [[LeapController alloc] init];
-//	[controller addListener:self];
-//	NSLog(@"running");
+	[controller addListener:self];
+	NSLog(@"running");
 	
 	NSURL *url = [[NSURL alloc] initWithString:@"ws://taptappun.cloudapp.net:3001"];
 	socket = [[SRWebSocket alloc] initWithURL:url];
