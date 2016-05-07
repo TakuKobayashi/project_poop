@@ -173,7 +173,7 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Leap Motion";
 			};
-			buildConfigurationList = B599FCBD1656F5020092AFFD /* Build configuration list for PBXProject "SampleObjectiveC" */;
+			buildConfigurationList = B599FCBD1656F5020092AFFD /* Build configuration list for PBXProject "Ōarai" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -344,7 +344,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B599FCBD1656F5020092AFFD /* Build configuration list for PBXProject "SampleObjectiveC" */ = {
+		B599FCBD1656F5020092AFFD /* Build configuration list for PBXProject "Ōarai" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B599FCDF1656F5020092AFFD /* Debug */,

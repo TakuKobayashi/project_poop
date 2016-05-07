@@ -17,7 +17,7 @@
                BlueprintIdentifier = "B599FCC21656F5020092AFFD"
                BuildableName = "Sample.app"
                BlueprintName = "Sample"
-               ReferencedContainer = "container:SampleObjectiveC.xcodeproj">
+               ReferencedContainer = "container:O&#x304;arai.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "B599FCC21656F5020092AFFD"
             BuildableName = "Sample.app"
             BlueprintName = "Sample"
-            ReferencedContainer = "container:SampleObjectiveC.xcodeproj">
+            ReferencedContainer = "container:O&#x304;arai.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "B599FCC21656F5020092AFFD"
             BuildableName = "Sample.app"
             BlueprintName = "Sample"
-            ReferencedContainer = "container:SampleObjectiveC.xcodeproj">
+            ReferencedContainer = "container:O&#x304;arai.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -77,7 +77,7 @@
             BlueprintIdentifier = "B599FCC21656F5020092AFFD"
             BuildableName = "Sample.app"
             BlueprintName = "Sample"
-            ReferencedContainer = "container:SampleObjectiveC.xcodeproj">
+            ReferencedContainer = "container:O&#x304;arai.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
