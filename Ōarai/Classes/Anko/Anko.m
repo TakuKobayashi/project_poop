@@ -14,7 +14,9 @@
     NSArray *fingerNames;
     NSArray *boneNames;
 	
+	bool isInAction;
 	bool isHandsClose;
+	bool isGuPGood;
 	
 	int interval;
 	
@@ -26,7 +28,9 @@
 - (id)init
 {
 	
+	isInAction = false;
 	isHandsClose = false;
+	isGuPGood = false;
 	
 	interval = 0;
 	
@@ -95,17 +99,18 @@
     LeapFrame *frame = [aController frame:0];
 	
 	interval++;
-	if (interval >= 30) {
+	if (interval >= 60) {
 		interval = 0;
 	}
 	
 	if (interval == 0) {
 		[self setHandsPositions:frame];
+		[self setGuPGood:frame];
 	}
 	
 	if ([self closeHandsGesture:frame]) {
 		if (isSockedOpened) {
-			[socket send:@"{\"action\":\"V8\", \"data\":\"null\"}"];
+			[socket send:@"{\"action\":\"V8\", \"data\":null}"];
 		}
 		NSLog(@"V8!");
 		
@@ -159,39 +164,72 @@
 
 - (void)setHandsPositions: (LeapFrame *)frame {
 	
-	NSArray *array = [frame hands];
-	for (LeapHand *hand in array) {
-		float x = hand.palmPosition.x;
-		float y = hand.palmPosition.y;
-		if (hand.isLeft) {
-			x += 110;
-		} else if (hand.isRight) {
-			x -= 110;
-		}
-		x /= -50;
-		if (x < -1) {
-			x = -1;
-		} else if (x > 1) {
-			x = 1;
+	if (isSockedOpened) {
+		
+		NSArray *array = [frame hands];
+		
+		if ([array count] == 0) {
+			if (isInAction) {
+				isInAction = false;
+				[socket send:@"{\"action\":\"reset\", \"data\": null}"];
+			}
+			return;
 		}
 		
-		y -= 350;
-		y /= -250;
-		if (y < -1) {
-			y = -1;
-		} else if (y > 1) {
-			y = 1;
+		isInAction = true;
+		for (LeapHand *hand in array) {
+			float x = hand.palmPosition.x;
+			float y = hand.palmPosition.y;
+			if (hand.isLeft) {
+				x += 110;
+			} else if (hand.isRight) {
+				x -= 110;
+			}
+			x /= -50;
+			if (x < -1) {
+				x = -1;
+			} else if (x > 1) {
+				x = 1;
+			}
+			
+			y -= 350;
+			y /= -250;
+			if (y < -1) {
+				y = -1;
+			} else if (y > 1) {
+				y = 1;
+			}
+			
+			NSString *shoulder = @"shoulder";
+			if (hand.isLeft) {
+				shoulder = [@"move_l" stringByAppendingString:shoulder];
+			} else if (hand.isRight) {
+				shoulder = [@"move_r" stringByAppendingString:shoulder];
+			}
+			
+			NSString *message = [NSString stringWithFormat:@"{\"action\":\"%@\", \"data\":\"[%f, %f]\"}", shoulder, x, y];
+			[socket send:message];
 		}
+	}
+	
+}
+
+- (void)setGuPGood: (LeapFrame *)frame {
+	
+	if (isSockedOpened) {
 		
-		NSString *shoulder = @"shoulder";
-		if (hand.isLeft) {
-			shoulder = [@"move_l" stringByAppendingString:shoulder];
-		} else if (hand.isRight) {
-			shoulder = [@"move_r" stringByAppendingString:shoulder];
+		NSArray *array = [frame hands];
+		for (LeapHand *hand in array) {
+			if (hand.isRight) {
+				float y = hand.palmPosition.y;
+				if (y > 400) {
+					[socket send:@"{\"backgroundImage\":\"garupan\"}"];
+					
+				} else {
+					[socket send:@"{\"backgroundImage\":\"remove\"}"];
+				}
+			}
 		}
-		
-		NSString *message = [NSString stringWithFormat:@"{\"action\":\"%@\", \"data\":\"[%f, %f]\"}", shoulder, x, y];
-		[socket send:message];
 	}
 	
 }
