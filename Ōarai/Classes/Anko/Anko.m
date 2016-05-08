@@ -19,13 +19,16 @@ struct ShoulderPosition {
     NSArray *fingerNames;
     NSArray *boneNames;
 	
+	int interval;
+	
 	bool isHandsClose;
 	bool isGuPGood;
 	
-	struct ShoulderPosition lPosition;
-	struct ShoulderPosition rPosition;
+	struct ShoulderPosition lLastPosition;
+	struct ShoulderPosition rLastPosition;
 	
-	int interval;
+	struct ShoulderPosition lCurrentPosition;
+	struct ShoulderPosition rCurrentPosition;
 	
 	SRWebSocket *socket;
 	bool isSockedOpened;
@@ -35,15 +38,20 @@ struct ShoulderPosition {
 - (id)init
 {
 	
+	interval = 0;
+	
 	isHandsClose = false;
 	isGuPGood = false;
 	
-	lPosition.x = 0;
-	lPosition.y = 0;
-	rPosition.x = 0;
-	rPosition.y = 0;
+	lCurrentPosition.x = 0;
+	lCurrentPosition.y = 0;
+	rCurrentPosition.x = 0;
+	rCurrentPosition.y = 0;
 	
-	interval = 0;
+	lLastPosition.x = 0;
+	lLastPosition.y = 0;
+	rLastPosition.x = 0;
+	rLastPosition.y = 0;
 	
 	isSockedOpened = false;
 	isRightHandSwipingToRight = false;
@@ -69,11 +77,15 @@ struct ShoulderPosition {
 	[controller addListener:self];
 	NSLog(@"running");
 	
+	[self createSocket];
+	
+}
+
+- (void)createSocket {
 	NSURL *url = [[NSURL alloc] initWithString:@"ws://taptappun.cloudapp.net:3001"];
 	socket = [[SRWebSocket alloc] initWithURL:url];
 	[socket setDelegate:self];
 	[socket open];
-	
 }
 
 #pragma mark - SRWebSocketDelegate Calbacks
@@ -84,6 +96,16 @@ struct ShoulderPosition {
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
+	
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
+	
+	isSockedOpened = false;
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+		[self createSocket];
+		NSLog(@"Reconnected");
+	});
 	
 }
 
@@ -110,7 +132,7 @@ struct ShoulderPosition {
     LeapFrame *frame = [aController frame:0];
 	
 	interval++;
-	if (interval >= 60) {
+	if (interval >= 15) {
 		interval = 0;
 	}
 	
@@ -179,10 +201,13 @@ struct ShoulderPosition {
 	initialPosition.x = 0;
 	initialPosition.y = 0;
 	
-	if (fabs(initialPosition.x - lPosition.x) > 0.2 || fabs(initialPosition.y - lPosition.y) > 0.2 ||
-		fabs(initialPosition.x - rPosition.x) > 0.2 || fabs(initialPosition.y - rPosition.y) > 0.2) {
-		lPosition = initialPosition;
-		rPosition = initialPosition;
+	if (fabs(initialPosition.x - lLastPosition.x) > 0.2 || fabs(initialPosition.y - lLastPosition.y) > 0.2 ||
+		fabs(initialPosition.x - rLastPosition.x) > 0.2 || fabs(initialPosition.y - rLastPosition.y) > 0.2) {
+		lCurrentPosition = initialPosition;
+		rCurrentPosition = initialPosition;
+		
+		lLastPosition = initialPosition;
+		rLastPosition = initialPosition;
 		
 		if (isSockedOpened) {
 			[socket send:@"{\"action\":\"reset\", \"data\": null}"];
@@ -220,16 +245,24 @@ struct ShoulderPosition {
 				y = 1;
 			}
 			
-			if (fabs(x - lPosition.x) > 0.2 || fabs(y - lPosition.y ) > 0.2) {
-				lPosition.x = x;
-				lPosition.y = y;
+			if (fabs(x - lCurrentPosition.x) > 0.2 || fabs(y - lCurrentPosition.y) > 0.2) {
+				lCurrentPosition.x = x;
+				lCurrentPosition.y = y;
 				
-				if (isSockedOpened) {
-					NSString *shoulder = @"move_lshoulder";
-					NSString *message = [NSString stringWithFormat:@"{\"action\":\"%@\", \"data\":\"[%f, %f]\"}", shoulder, x, y];
-					[socket send:message];
+			} else {
+				if (fabs(x - lLastPosition.x) > 0.2 || fabs(y - lLastPosition.y) > 0.2) {
+					lCurrentPosition.x = x;
+					lCurrentPosition.y = y;
+					
+					lLastPosition.x = x;
+					lLastPosition.y = y;
+					
+					if (isSockedOpened) {
+						NSString *shoulder = @"move_lshoulder";
+						NSString *message = [NSString stringWithFormat:@"{\"action\":\"%@\", \"data\":\"[%f, %f]\"}", shoulder, x, y];
+						[socket send:message];
+					}
 				}
-				
 			}
 			
 		} else if (hand.isRight) {
@@ -251,16 +284,24 @@ struct ShoulderPosition {
 				y = 1;
 			}
 			
-			if (fabs(x - rPosition.x) > 0.2 || fabs(y - rPosition.y ) > 0.2) {
-				rPosition.x = x;
-				rPosition.y = y;
+			if (fabs(x - rCurrentPosition.x) > 0.2 || fabs(y - rCurrentPosition.y) > 0.2) {
+				rCurrentPosition.x = x;
+				rCurrentPosition.y = y;
 				
-				if (isSockedOpened) {
-					NSString *shoulder = @"move_rshoulder";
-					NSString *message = [NSString stringWithFormat:@"{\"action\":\"%@\", \"data\":\"[%f, %f]\"}", shoulder, x, y];
-					[socket send:message];
+			} else {
+				if (fabs(x - rLastPosition.x) > 0.2 || fabs(y - rLastPosition.y) > 0.2) {
+					rCurrentPosition.x = x;
+					rCurrentPosition.y = y;
+					
+					rLastPosition.x = x;
+					rLastPosition.y = y;
+					
+					if (isSockedOpened) {
+						NSString *shoulder = @"move_rshoulder";
+						NSString *message = [NSString stringWithFormat:@"{\"action\":\"%@\", \"data\":\"[%f, %f]\"}", shoulder, x, y];
+						[socket send:message];
+					}
 				}
-				
 			}
 			
 		}
