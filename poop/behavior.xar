@@ -265,6 +265,7 @@ class MyClass(GeneratedClass):
         pass
 
     def ws_on_open(self, ws):
+        self.ws_connection_retry = 0
         self.logger.info('connection open')
         pass
     ## ---- END WEBSOCKET FUNCTIONS ---- ##
