@@ -110,7 +110,7 @@ struct ShoulderPosition {
     LeapFrame *frame = [aController frame:0];
 	
 	interval++;
-	if (interval >= 15) {
+	if (interval >= 60) {
 		interval = 0;
 	}
 	
@@ -212,8 +212,8 @@ struct ShoulderPosition {
 				x = 1;
 			}
 			
-			y -= 350;
-			y /= -250;
+			y -= 250;
+			y /= -150;
 			if (y < -1) {
 				y = -1;
 			} else if (y > 1) {
@@ -243,8 +243,8 @@ struct ShoulderPosition {
 				x = 1;
 			}
 			
-			y -= 350;
-			y /= -250;
+			y -= 250;
+			y /= -150;
 			if (y < -1) {
 				y = -1;
 			} else if (y > 1) {
@@ -289,7 +289,7 @@ struct ShoulderPosition {
 					isGuPGood = true;
 					[socket send:@"{\"backgroundImage\":\"garupan\"}"];
 					
-				} else if (y < 400 && isGuPGood) {
+				} else if (y < 300 && isGuPGood) {
 					isGuPGood = false;
 					[socket send:@"{\"backgroundImage\":\"remove\"}"];
 				}
