@@ -77,11 +77,15 @@ struct ShoulderPosition {
 	[controller addListener:self];
 	NSLog(@"running");
 	
+	[self createSocket];
+	
+}
+
+- (void)createSocket {
 	NSURL *url = [[NSURL alloc] initWithString:@"ws://taptappun.cloudapp.net:3001"];
 	socket = [[SRWebSocket alloc] initWithURL:url];
 	[socket setDelegate:self];
 	[socket open];
-	
 }
 
 #pragma mark - SRWebSocketDelegate Calbacks
@@ -92,6 +96,16 @@ struct ShoulderPosition {
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
+	
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
+	
+	isSockedOpened = false;
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+		[self createSocket];
+		NSLog(@"Reconnected");
+	});
 	
 }
 
