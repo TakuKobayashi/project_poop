@@ -8,15 +8,22 @@
 
 #import "Anko.h"
 
+struct ShoulderPosition {
+	float x;
+	float y;
+};
+
 @implementation Anko
 {
     LeapController *controller;
     NSArray *fingerNames;
     NSArray *boneNames;
 	
-	bool isInAction;
 	bool isHandsClose;
 	bool isGuPGood;
+	
+	struct ShoulderPosition lPosition;
+	struct ShoulderPosition rPosition;
 	
 	int interval;
 	
@@ -28,9 +35,13 @@
 - (id)init
 {
 	
-	isInAction = false;
 	isHandsClose = false;
 	isGuPGood = false;
+	
+	lPosition.x = 0;
+	lPosition.y = 0;
+	rPosition.x = 0;
+	rPosition.y = 0;
 	
 	interval = 0;
 	
@@ -99,7 +110,7 @@
     LeapFrame *frame = [aController frame:0];
 	
 	interval++;
-	if (interval >= 60) {
+	if (interval >= 15) {
 		interval = 0;
 	}
 	
@@ -162,29 +173,38 @@
 
 
 
+- (void)resetHandsPositions {
+	
+	struct ShoulderPosition initialPosition;
+	initialPosition.x = 0;
+	initialPosition.y = 0;
+	
+	if (fabs(initialPosition.x - lPosition.x) > 0.2 || fabs(initialPosition.y - lPosition.y) > 0.2 ||
+		fabs(initialPosition.x - rPosition.x) > 0.2 || fabs(initialPosition.y - rPosition.y) > 0.2) {
+		lPosition = initialPosition;
+		rPosition = initialPosition;
+		
+		if (isSockedOpened) {
+			[socket send:@"{\"action\":\"reset\", \"data\": null}"];
+		}
+	}
+	
+}
+
 - (void)setHandsPositions: (LeapFrame *)frame {
 	
-	if (isSockedOpened) {
-		
-		NSArray *array = [frame hands];
-		
-		if ([array count] == 0) {
-			if (isInAction) {
-				isInAction = false;
-				[socket send:@"{\"action\":\"reset\", \"data\": null}"];
-			}
-			return;
-		}
-		
-		isInAction = true;
-		for (LeapHand *hand in array) {
+	NSArray *array = [frame hands];
+	
+	if ([array count] == 0) {
+		[self resetHandsPositions];
+		return;
+	}
+	
+	for (LeapHand *hand in array) {
+		if (hand.isLeft) {
 			float x = hand.palmPosition.x;
 			float y = hand.palmPosition.y;
-			if (hand.isLeft) {
-				x += 110;
-			} else if (hand.isRight) {
-				x -= 110;
-			}
+			x += 110;
 			x /= -50;
 			if (x < -1) {
 				x = -1;
@@ -200,16 +220,51 @@
 				y = 1;
 			}
 			
-			NSString *shoulder = @"shoulder";
-			if (hand.isLeft) {
-				shoulder = [@"move_l" stringByAppendingString:shoulder];
-			} else if (hand.isRight) {
-				shoulder = [@"move_r" stringByAppendingString:shoulder];
+			if (fabs(x - lPosition.x) > 0.2 || fabs(y - lPosition.y ) > 0.2) {
+				lPosition.x = x;
+				lPosition.y = y;
+				
+				if (isSockedOpened) {
+					NSString *shoulder = @"move_lshoulder";
+					NSString *message = [NSString stringWithFormat:@"{\"action\":\"%@\", \"data\":\"[%f, %f]\"}", shoulder, x, y];
+					[socket send:message];
+				}
+				
 			}
 			
-			NSString *message = [NSString stringWithFormat:@"{\"action\":\"%@\", \"data\":\"[%f, %f]\"}", shoulder, x, y];
-			[socket send:message];
+		} else if (hand.isRight) {
+			float x = hand.palmPosition.x;
+			float y = hand.palmPosition.y;
+			x -= 110;
+			x /= -50;
+			if (x < -1) {
+				x = -1;
+			} else if (x > 1) {
+				x = 1;
+			}
+			
+			y -= 350;
+			y /= -250;
+			if (y < -1) {
+				y = -1;
+			} else if (y > 1) {
+				y = 1;
+			}
+			
+			if (fabs(x - rPosition.x) > 0.2 || fabs(y - rPosition.y ) > 0.2) {
+				rPosition.x = x;
+				rPosition.y = y;
+				
+				if (isSockedOpened) {
+					NSString *shoulder = @"move_rshoulder";
+					NSString *message = [NSString stringWithFormat:@"{\"action\":\"%@\", \"data\":\"[%f, %f]\"}", shoulder, x, y];
+					[socket send:message];
+				}
+				
+			}
+			
 		}
+		
 	}
 	
 }
@@ -219,13 +274,23 @@
 	if (isSockedOpened) {
 		
 		NSArray *array = [frame hands];
+		if ([array count] == 0) {
+			if (isGuPGood) {
+				isGuPGood = false;
+				[socket send:@"{\"backgroundImage\":\"remove\"}"];
+			}
+			return;
+		}
+		
 		for (LeapHand *hand in array) {
 			if (hand.isRight) {
 				float y = hand.palmPosition.y;
-				if (y > 400) {
+				if (y > 400 && !isGuPGood) {
+					isGuPGood = true;
 					[socket send:@"{\"backgroundImage\":\"garupan\"}"];
 					
-				} else {
+				} else if (y < 400 && isGuPGood) {
+					isGuPGood = false;
 					[socket send:@"{\"backgroundImage\":\"remove\"}"];
 				}
 			}
