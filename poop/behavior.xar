@@ -253,6 +253,7 @@ class MyClass(GeneratedClass):
     def ws_on_error(self, ws, error):
         if self.ws_connection_retry < 3 :
             self.logger.info('reconnect ws')
+            time.sleep(1)
             self.ws_connection_retry = self.ws_connection_retry + 1
             self.init_websocket_connection()
         else:
@@ -264,6 +265,7 @@ class MyClass(GeneratedClass):
         pass
 
     def ws_on_open(self, ws):
+        self.ws_connection_retry = 0
         self.logger.info('connection open')
         pass
     ## ---- END WEBSOCKET FUNCTIONS ---- ##
